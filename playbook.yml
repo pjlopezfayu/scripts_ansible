@@ -1,5 +1,6 @@
 ---
 - hosts: clientes 
+
   roles: 
     - ../roles/role-snmp
     - ../roles/role-install
