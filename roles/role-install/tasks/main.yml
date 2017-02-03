@@ -1,0 +1,4 @@
+---
+   - name: instalar telnet
+     yum: name=telnet 
+          state=present

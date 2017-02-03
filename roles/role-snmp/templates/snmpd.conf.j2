@@ -1,0 +1,27 @@
+#######################################################
+### HERRAMIENTAS CORE - Informatica El Corte Ingles ###
+#######################################################
+
+sysname       {{ ansible_hostname }}
+syslocation   IECISA
+syscontact    IECISA Mirasierra Operadores Sala
+
+#       sec.name        source                  community
+com2sec notConfigUser   localhost               public
+com2sec secIECISA       S2Argos                 {{ snmp_community }}
+com2sec secIECISA       S2Ciclope               {{ snmp_community }}
+com2sec secIECISA       S2Argos_icex            {{ snmp_community }}
+com2sec secIECISA       S2Ciclope_icex          {{ snmp_community }}
+
+#                               sec.model       sec.name
+group   notConfigGroup          v1              notConfigUser
+group   groupIECISA             v1              secIECISA
+group   groupIECISA             v2c             secIECISA
+
+#                               incl/excl       subtree     [mask]
+view    all                     included        .1
+
+#context model level   prefix  read    write  notify (unused)
+access  notConfigGroup  ""  any  noauth  exact   all     none   none
+access  groupIECISA     ""  any  noauth  exact   all     none   none
+

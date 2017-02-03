@@ -1,0 +1,17 @@
+---
+   - name: descripcion instalar snmp
+     yum: name=net-snmp 
+          state=present
+          update_cache=yes
+
+   - lineinfile: dest=/etc/hosts
+                 line="192.168.25.40 S2Argos"
+
+   - name: Descripcion copy template
+     template: src=snmpd.conf.j2
+               dest=/etc/snmp/snmpd.conf
+     notify:
+       - restarted
+
+   - name: restart snmpd
+     service: name=snmpd state=restarted
